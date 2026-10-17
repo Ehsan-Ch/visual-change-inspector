@@ -18,8 +18,8 @@ class Config:
             raise ValueError("threshold must be finite and between 0 and 255")
         if not isinstance(self.min_area, int) or self.min_area < 1:
             raise ValueError("min_area must be a positive integer")
-        if self.min_inliers < 4:
-            raise ValueError("min_inliers must be at least four")
+        if not isinstance(self.min_inliers, int) or isinstance(self.min_inliers, bool) or self.min_inliers < 4:
+            raise ValueError("min_inliers must be an integer of at least four")
         if not all(np.isfinite(v) and 0 < v <= 1 for v in
                    (self.min_inlier_ratio, self.min_coverage, self.min_overlap)):
             raise ValueError("quality fractions must be in (0, 1]")
